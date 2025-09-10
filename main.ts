@@ -93,20 +93,21 @@ const daySt = [
   '日'
 ]
 
-const teamShortName = {
-  '北海道日本ハム': 'F',
-  '福岡ソフトバンク': 'H',
-  '東北楽天': 'E',
-  '埼玉西武': 'L',
-  'オリックス': 'B',
-  '千葉ロッテ': 'M',
-
-  '阪　神': 'T',
-  '読　売': 'G',
-  '東京ヤクルト': 'S',
-  '広島東洋': 'C',
-  '横浜DeNA': 'DB',
-  '中　日': 'D' 
+function teamShortName(teamname: string) {
+    switch (teamname) {
+        case '北海道日本ハム': return 'F'
+        case '福岡ソフトバンク': return 'H'
+        case '東北楽天': return 'E'
+        case '埼玉西武': return 'L'
+        case 'オリックス': return 'B'
+        case '千葉ロッテ': return 'M'
+        case '阪　神': return 'T'
+        case '読　売': return 'G'
+        case '東京ヤクルト': return 'S'
+        case '広島東洋': return 'C'
+        case '横浜DeNA': return 'DB'
+        case '中　日': return 'D'
+    }
 }
 
 async function displayLatestGame() {
@@ -120,11 +121,11 @@ async function displayLatestGame() {
 }[]) => {
     const resultsDiv = document.getElementById('latest-results');
     if (resultsDiv == null) return;
-    resultsDiv.innerHTML = `<h2>最新試合結果  ${today.getMonth()+1}/${today.getDate()}(${daySt[today.getDay()]})</h2>`;
+    resultsDiv.innerHTML = `<h2>最新試合結果   ${today.getMonth()+1}/${today.getDate()}(${daySt[today.getDay()]})</h2>`;
     const ul = document.createElement('ul');
     data.forEach(game => {
         const li = document.createElement('li');
-        li.textContent = `${game.homeTeam} (${game.homeScore}) ー (${game.visitorScore}) ${game.visitorTeam}`;
+        li.textContent = `${teamShortName(game.homeTeam)}  ${game.homeScore} - ${game.visitorScore}  ${teamShortName(game.visitorTeam)}`;
         ul.appendChild(li);
     });
     resultsDiv.appendChild(ul);
