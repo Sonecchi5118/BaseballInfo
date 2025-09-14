@@ -3,14 +3,29 @@ body {
   font-size: 20px
 }
 
+.th, td {
+    border: 1px solid #333;
+    padding: 8px 12px;
+    text-align: center;
+}
+.th {
+    background-color: #f2f2f2;
+}
+.caption {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .scrollable-table {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* スマホでスムーズスクロール */
 }
 
 .scrollable-table table {
-  min-width: 600px; /* テーブルの最低幅を設定（必要に応じて調整） */
-  border-collapse: collapse;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
 }
 
 
