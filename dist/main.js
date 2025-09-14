@@ -1,29 +1,53 @@
 "use strict";
+const rankingData = [
+    {
+        team: "オリックス",
+        win: 0,
+        lose: 0,
+        draw: 0
+    },
+    {
+        team: "ソフトバンク",
+        win: 0,
+        lose: 0,
+        draw: 0
+    },
+    {
+        team: "楽天",
+        win: 0,
+        lose: 0,
+        draw: 0
+    },
+    {
+        team: "日本ハム",
+        win: 0,
+        lose: 0,
+        draw: 0
+    },
+    {
+        team: "西部",
+        win: 0,
+        lose: 0,
+        draw: 0
+    },
+    {
+        team: "ロッテ",
+        win: 0,
+        lose: 0,
+        draw: 0
+    }
+];
 const now = new Date();
-let rankingData;
-async function loadResults() {
-    try {
-        const res = await fetch('./result.json');
-        if (!res.ok)
-            throw new Error('❌ 読み込み失敗');
-        const data = await res.json();
-        rankingData = data;
-        return;
-    }
-    catch (err) {
-        console.error(err);
-    }
-}
-function renderRankingTable() {
+function renderRankingTable(Data) {
     const tbody = document.getElementById('ranking-body');
     if (tbody == null)
         return;
     tbody.innerHTML = '';
-    for (let index = 0; index < rankingData.length; index++) {
-        const row = rankingData.sort((a, b) => {
-            return b.win / b.games - a.win / a.games;
+    for (let index = 0; index < Data.length; index++) {
+        const row = Data.sort((a, b) => {
+            return a.win / (a.win + a.lose) - b.win / (b.win + b.lose);
         })[index];
-        const upTeam = index >= 1 ? rankingData[index - 1] : undefined;
+        const upTeam = index >= 1 ? Data[index - 1] : undefined;
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${index + 1}</td>
@@ -32,7 +56,7 @@ function renderRankingTable() {
             <td>${row.lose}</td>
             <td>${row.draw}</td>
             <td>${`${Math.round(row.win / (row.win + row.lose) * 10000) / 10000}0000`.slice(1, 6)}</td>
-            <td>${upTeam ? `${((upTeam.win - upTeam.lose) - (row.win - row.lose)) / 2}.0`.slice(0, 3) : '-'}</td>
+            <td>${upTeam ? ((upTeam.win - upTeam.lose) - (row.win - row.lose)) / 2 : '-'}</td>
             <td>${row.win - row.lose}</td>
             <td>${143 - (row.win + row.lose)}</td>
         `;
@@ -134,8 +158,20 @@ async function displayLatestGame() {
     }
     display(result, Day);
 }
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadResults();
+async function getTeamGrades() {
+    const Day = new Date(`${now.getFullYear()}-3-24`);
+    while (Day.getMonth() < now.getMonth() || Day.getDate() <= now.getDate()) {
+        Day.setDate(Day.getDate() + 1);
+        const result = await getGameResult(Day);
+        if (result == undefined)
+            continue;
+        result.forEach(part => {
+            part;
+        });
+    }
+    renderRankingTable(rankingData);
+}
+document.addEventListener('DOMContentLoaded', () => {
     displayLatestGame();
-    renderRankingTable();
+    getTeamGrades();
 });

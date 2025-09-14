@@ -1,11 +1,11 @@
 /* デフォルト（パソコン向け） */
 body {
-  font-size: 16px
+  font-size: 20px
 }
 
 @media screen and (max-width: 600px) {
   body {
-    font-size: 20px; /* スマホ画面ではさらに大きく */
+    font-size: 30px; /* スマホ画面ではさらに大きく */
   }
 
   h1, h2, h3 {

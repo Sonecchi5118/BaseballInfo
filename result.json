@@ -1,0 +1,44 @@
+[
+  {
+    "team": "ソフトバンク",
+    "games": 127,
+    "win": 76,
+    "lose": 47,
+    "draw": 4
+  },
+  {
+    "team": "日本ハム",
+    "games": 129,
+    "win": 75,
+    "lose": 51,
+    "draw": 3
+  },
+  {
+    "team": "オリックス",
+    "games": 126,
+    "win": 64,
+    "lose": 59,
+    "draw": 3
+  },
+  {
+    "team": "楽天",
+    "games": 125,
+    "win": 59,
+    "lose": 64,
+    "draw": 2
+  },
+  {
+    "team": "西部",
+    "games": 125,
+    "win": 57,
+    "lose": 65,
+    "draw": 3
+  },
+  {
+    "team": "ロッテ",
+    "games": 126,
+    "win": 49,
+    "lose": 74,
+    "draw": 3
+  }
+]
