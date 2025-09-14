@@ -19,14 +19,16 @@ body {
 
 .scrollable-table {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* スマホでスムーズスクロール */
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .scrollable-table table {
-    border-collapse: collapse;
-    width: 80%;
-    margin: 20px auto;
+  border-collapse: collapse;
+  min-width: 600px; /* ← ここが重要！ */
+  margin: 20px auto;
 }
+
 
 
 @media screen and (max-width: 600px) {
