@@ -19,10 +19,30 @@ function renderRankingTable() {
     if (tbody == null)
         return;
     tbody.innerHTML = '';
+    const sortedRankingData = rankingData.sort((a, b) => {
+        return b.win / b.games - a.win / a.games;
+    });
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>順位</td>
+        <td>チーム名</td>
+        <td>勝利</td>
+        <td>敗戦</td>
+        <td>引分</td>
+        <td>勝率</td>
+        <td>ゲーム差</td>
+        <td>貯・借金</td>
+        <td>残試合</td>
+        <td>vs${teamShortName(sortedRankingData[0].team)}</td>
+        <td>vs${teamShortName(sortedRankingData[1].team)}</td>
+        <td>vs${teamShortName(sortedRankingData[2].team)}</td>
+        <td>vs${teamShortName(sortedRankingData[3].team)}</td>
+        <td>vs${teamShortName(sortedRankingData[4].team)}</td>
+        <td>vs${teamShortName(sortedRankingData[5].team)}</td>
+    `;
+    tbody.appendChild(tr);
     for (let index = 0; index < rankingData.length; index++) {
-        const row = rankingData.sort((a, b) => {
-            return b.win / b.games - a.win / a.games;
-        })[index];
+        const row = sortedRankingData[index];
         const upTeam = index >= 1 ? rankingData[index - 1] : undefined;
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -35,6 +55,12 @@ function renderRankingTable() {
             <td>${upTeam ? `${((upTeam.win - upTeam.lose) - (row.win - row.lose)) / 2}.0`.slice(0, 3) : '-'}</td>
             <td>${row.win - row.lose}</td>
             <td>${143 - (row.win + row.lose)}</td>
+            <td>${row.vs1 ? `${row.vs1.win}-${row.vs1.lose}(${row.vs1.draw})` : '-'}</td>
+            <td>${row.vs2 ? `${row.vs2.win}-${row.vs2.lose}(${row.vs2.draw})` : '-'}</td>
+            <td>${row.vs3 ? `${row.vs3.win}-${row.vs3.lose}(${row.vs3.draw})` : '-'}</td>
+            <td>${row.vs4 ? `${row.vs4.win}-${row.vs4.lose}(${row.vs4.draw})` : '-'}</td>
+            <td>${row.vs5 ? `${row.vs5.win}-${row.vs5.lose}(${row.vs5.draw})` : '-'}</td>
+            <td>${row.vs6 ? `${row.vs6.win}-${row.vs6.lose}(${row.vs6.draw})` : '-'}</td>
         `;
         tbody.appendChild(tr);
     }
@@ -80,18 +106,18 @@ const daySt = [
 ];
 function teamShortName(teamname) {
     switch (teamname) {
-        case '北海道日本ハム': return 'F';
-        case '福岡ソフトバンク': return 'H';
-        case '東北楽天': return 'E';
-        case '埼玉西武': return 'L';
+        case '日本ハム': return 'F';
+        case 'ソフトバンク': return 'H';
+        case '楽天': return 'E';
+        case '西武': return 'L';
         case 'オリックス': return 'B';
-        case '千葉ロッテ': return 'M';
-        case '阪　神': return 'T';
-        case '読　売': return 'G';
-        case '東京ヤクルト': return 'S';
-        case '広島東洋': return 'C';
-        case '横浜DeNA': return 'DB';
-        case '中　日': return 'D';
+        case 'ロッテ': return 'M';
+        case '阪神': return 'T';
+        case '読売': return 'G';
+        case 'ヤクルト': return 'S';
+        case '広島': return 'C';
+        case 'DeNA': return 'DB';
+        case '中日': return 'D';
         default: return teamname;
     }
 }
@@ -100,7 +126,7 @@ function teamName(teamname) {
         case '北海道日本ハム': return '日本ハム';
         case '福岡ソフトバンク': return 'ソフトバンク';
         case '東北楽天': return '楽天';
-        case '埼玉西武': return '西部';
+        case '埼玉西武': return '西武';
         case 'オリックス': return 'オリックス';
         case '千葉ロッテ': return 'ロッテ';
         case '阪　神': return '阪神';

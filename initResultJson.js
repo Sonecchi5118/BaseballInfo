@@ -5,7 +5,7 @@ function teamName(teamname) {
         case '北海道日本ハム': return '日本ハム';
         case '福岡ソフトバンク': return 'ソフトバンク';
         case '東北楽天': return '楽天';
-        case '埼玉西武': return '西部';
+        case '埼玉西武': return '西武';
         case 'オリックス': return 'オリックス';
         case '千葉ロッテ': return 'ロッテ';
         case '阪　神': return '阪神';
@@ -22,12 +22,25 @@ const url = 'https://npb.jp/bis/2025/stats/std_p.html';
 async function fetchStandings() {
     const res = await fetch(url);
     const htmlText = await res.text();
-    const regex = /<td\s+class="stdTeam">(.*?)<br\s+\/>(.*?)<\/td><\/tr><\/table><\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td>/g;
+    const regex = /<td\s+class="stdTeam">(.*?)<br\s+\/>(.*?)<\/td><\/tr><\/table><\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td>/g;
     for (const info of htmlText.matchAll(regex)) {
         const team = teamName(info[1]);
         if (result.find(r => r.team == team) != undefined)
             continue;
-        result.push({ team, games: Number(info[3]), win: Number(info[4]), lose: Number(info[5]), draw: Number(info[6]) });
+        const vs1 = info[11].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[11].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs2 = info[12].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[12].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs3 = info[13].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[13].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs4 = info[14].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[14].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs5 = info[15].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[15].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs6 = info[16].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[16].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        result.push({ team, games: Number(info[3]), win: Number(info[4]), lose: Number(info[5]), draw: Number(info[6]),
+            vs1: !vs1 ? undefined : { win: Number(vs1[1]), lose: Number(vs1[2]), draw: Number(vs1[3] ?? 0) },
+            vs2: !vs2 ? undefined : { win: Number(vs2[1]), lose: Number(vs2[2]), draw: Number(vs2[3] ?? 0) },
+            vs3: !vs3 ? undefined : { win: Number(vs3[1]), lose: Number(vs3[2]), draw: Number(vs3[3] ?? 0) },
+            vs4: !vs4 ? undefined : { win: Number(vs4[1]), lose: Number(vs4[2]), draw: Number(vs4[3] ?? 0) },
+            vs5: !vs5 ? undefined : { win: Number(vs5[1]), lose: Number(vs5[2]), draw: Number(vs5[3] ?? 0) },
+            vs6: !vs6 ? undefined : { win: Number(vs6[1]), lose: Number(vs6[2]), draw: Number(vs6[3] ?? 0) },
+        });
     }
 }
 async function main() {
