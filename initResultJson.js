@@ -1,5 +1,13 @@
 import fetch from 'node-fetch';
 import * as fs from 'fs';
+const lastyearResult = {
+    '日本ハム': 2,
+    'ソフトバンク': 1,
+    '楽天': 4,
+    '西武': 6,
+    'オリックス': 5,
+    'ロッテ': 3
+};
 function teamName(teamname) {
     switch (teamname) {
         case '北海道日本ハム': return '日本ハム';
@@ -23,17 +31,24 @@ async function fetchStandings() {
     const res = await fetch(url);
     const htmlText = await res.text();
     const regex = /<td\s+class="stdTeam">(.*?)<br\s+\/>(.*?)<\/td><\/tr><\/table><\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td><td\s+class="stdscore">(.*?)<\/td>/g;
+    for (let month = 4; month <= 10; month++) {
+        const res = await fetch(`https://npb.jp/bis/2025/calendar/index_${`0${month}`.slice(-2)}.html`);
+        const htmlText = await res.text();
+        console.log(htmlText);
+    }
     for (const info of htmlText.matchAll(regex)) {
         const team = teamName(info[1]);
         if (result.find(r => r.team == team) != undefined)
             continue;
-        const vs1 = info[11].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[11].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
-        const vs2 = info[12].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[12].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
-        const vs3 = info[13].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[13].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
-        const vs4 = info[14].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[14].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
-        const vs5 = info[15].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[15].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
-        const vs6 = info[16].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? info[16].replace(/<br \/>/g, '').match(/(.*?)-(.*?)/);
+        const vs1 = info[11].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[11] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
+        const vs2 = info[12].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[12] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
+        const vs3 = info[13].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[13] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
+        const vs4 = info[14].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[14] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
+        const vs5 = info[15].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[15] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
+        const vs6 = info[16].replace(/<br \/>/g, '').match(/(.*?)-(.*?)\((.*?)\)/) ?? (info[16] + '(0)').match(/(.*?)-(.*?)\((.*?)\)/);
         result.push({ team, games: Number(info[3]), win: Number(info[4]), lose: Number(info[5]), draw: Number(info[6]),
+            lastyear: lastyearResult[team],
+            rate: 1500,
             vs1: !vs1 ? undefined : { win: Number(vs1[1]), lose: Number(vs1[2]), draw: Number(vs1[3] ?? 0) },
             vs2: !vs2 ? undefined : { win: Number(vs2[1]), lose: Number(vs2[2]), draw: Number(vs2[3] ?? 0) },
             vs3: !vs3 ? undefined : { win: Number(vs3[1]), lose: Number(vs3[2]), draw: Number(vs3[3] ?? 0) },

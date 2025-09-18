@@ -1,28 +1,30 @@
 [
   {
     "team": "ソフトバンク",
-    "games": 127,
-    "win": 76,
+    "games": 128,
+    "win": 77,
     "lose": 47,
     "draw": 4,
+    "lastyear": 1,
+    "rate": 1500,
     "vs2": {
       "win": 12,
-      "lose": 0,
+      "lose": 11,
       "draw": 0
     },
     "vs3": {
-      "win": 13,
+      "win": 14,
       "lose": 3,
       "draw": 2
     },
     "vs4": {
       "win": 11,
-      "lose": 0,
+      "lose": 11,
       "draw": 0
     },
     "vs5": {
       "win": 14,
-      "lose": 0,
+      "lose": 8,
       "draw": 0
     },
     "vs6": {
@@ -33,13 +35,15 @@
   },
   {
     "team": "日本ハム",
-    "games": 129,
-    "win": 75,
+    "games": 130,
+    "win": 76,
     "lose": 51,
     "draw": 3,
+    "lastyear": 2,
+    "rate": 1500,
     "vs1": {
       "win": 11,
-      "lose": 0,
+      "lose": 12,
       "draw": 0
     },
     "vs3": {
@@ -53,25 +57,27 @@
       "draw": 1
     },
     "vs5": {
-      "win": 12,
+      "win": 13,
       "lose": 8,
       "draw": 1
     },
     "vs6": {
       "win": 13,
-      "lose": 0,
+      "lose": 6,
       "draw": 0
     }
   },
   {
     "team": "オリックス",
-    "games": 126,
+    "games": 127,
     "win": 64,
-    "lose": 59,
+    "lose": 60,
     "draw": 3,
+    "lastyear": 5,
+    "rate": 1500,
     "vs1": {
       "win": 3,
-      "lose": 13,
+      "lose": 14,
       "draw": 2
     },
     "vs2": {
@@ -81,29 +87,31 @@
     },
     "vs4": {
       "win": 11,
-      "lose": 0,
+      "lose": 10,
       "draw": 0
     },
     "vs5": {
       "win": 13,
-      "lose": 0,
+      "lose": 9,
       "draw": 0
     },
     "vs6": {
       "win": 14,
-      "lose": 0,
+      "lose": 8,
       "draw": 0
     }
   },
   {
     "team": "楽天",
-    "games": 125,
-    "win": 59,
+    "games": 126,
+    "win": 60,
     "lose": 64,
     "draw": 2,
+    "lastyear": 4,
+    "rate": 1500,
     "vs1": {
       "win": 11,
-      "lose": 0,
+      "lose": 11,
       "draw": 0
     },
     "vs2": {
@@ -113,44 +121,46 @@
     },
     "vs3": {
       "win": 10,
-      "lose": 0,
+      "lose": 11,
       "draw": 0
     },
     "vs5": {
       "win": 10,
-      "lose": 0,
+      "lose": 10,
       "draw": 0
     },
     "vs6": {
-      "win": 13,
-      "lose": 0,
+      "win": 14,
+      "lose": 8,
       "draw": 0
     }
   },
   {
     "team": "西武",
-    "games": 125,
+    "games": 126,
     "win": 57,
-    "lose": 65,
+    "lose": 66,
     "draw": 3,
+    "lastyear": 6,
+    "rate": 1500,
     "vs1": {
       "win": 8,
-      "lose": 0,
+      "lose": 14,
       "draw": 0
     },
     "vs2": {
       "win": 8,
-      "lose": 12,
+      "lose": 13,
       "draw": 1
     },
     "vs3": {
       "win": 9,
-      "lose": 0,
+      "lose": 13,
       "draw": 0
     },
     "vs4": {
       "win": 10,
-      "lose": 0,
+      "lose": 10,
       "draw": 0
     },
     "vs6": {
@@ -161,10 +171,12 @@
   },
   {
     "team": "ロッテ",
-    "games": 126,
+    "games": 127,
     "win": 49,
-    "lose": 74,
+    "lose": 75,
     "draw": 3,
+    "lastyear": 3,
+    "rate": 1500,
     "vs1": {
       "win": 9,
       "lose": 14,
@@ -172,17 +184,17 @@
     },
     "vs2": {
       "win": 6,
-      "lose": 0,
+      "lose": 13,
       "draw": 0
     },
     "vs3": {
       "win": 8,
-      "lose": 0,
+      "lose": 14,
       "draw": 0
     },
     "vs4": {
       "win": 8,
-      "lose": 0,
+      "lose": 14,
       "draw": 0
     },
     "vs5": {

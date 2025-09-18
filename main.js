@@ -19,8 +19,23 @@ function renderRankingTable() {
     if (tbody == null)
         return;
     tbody.innerHTML = '';
+    const RawsortedRankingData = rankingData.sort((a, b) => {
+        return b.win / (b.win + b.lose) - a.win / (a.win + a.lose);
+    });
     const sortedRankingData = rankingData.sort((a, b) => {
-        return b.win / b.games - a.win / a.games;
+        if (b.win / (b.win + b.lose) != a.win / (a.win + a.lose))
+            return b.win / (b.win + b.lose) - a.win / (a.win + a.lose);
+        else {
+            const aind = RawsortedRankingData.findIndex(d => d.team == a.team);
+            const bind = RawsortedRankingData.findIndex(d => d.team == b.team);
+            const avsb = (a[`vs${bind}`] ?? a[`vs${aind}`]);
+            if (avsb.win != avsb.lose)
+                return avsb.lose - avsb.win;
+            else {
+                return ((b.vs1?.win ?? 0) + (b.vs2?.win ?? 0) + (b.vs3?.win ?? 0) + (b.vs4?.win ?? 0) + (b.vs5?.win ?? 0) + (b.vs6?.win ?? 0)) / ((b.vs1?.win ?? 0) + (b.vs2?.win ?? 0) + (b.vs3?.win ?? 0) + (b.vs4?.win ?? 0) + (b.vs5?.win ?? 0) + (b.vs6?.win ?? 0) + (b.vs1?.lose ?? 0) + (b.vs2?.lose ?? 0) + (b.vs3?.lose ?? 0) + (b.vs4?.lose ?? 0) + (b.vs5?.lose ?? 0) + (b.vs6?.lose ?? 0))
+                    - ((a.vs1?.win ?? 0) + (a.vs2?.win ?? 0) + (a.vs3?.win ?? 0) + (a.vs4?.win ?? 0) + (a.vs5?.win ?? 0) + (a.vs6?.win ?? 0)) / ((a.vs1?.win ?? 0) + (a.vs2?.win ?? 0) + (a.vs3?.win ?? 0) + (a.vs4?.win ?? 0) + (a.vs5?.win ?? 0) + (a.vs6?.win ?? 0) + (a.vs1?.lose ?? 0) + (a.vs2?.lose ?? 0) + (a.vs3?.lose ?? 0) + (a.vs4?.lose ?? 0) + (a.vs5?.lose ?? 0) + (a.vs6?.lose ?? 0));
+            }
+        }
     });
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -52,9 +67,9 @@ function renderRankingTable() {
             <td>${row.lose}</td>
             <td>${row.draw}</td>
             <td>${`${Math.round(row.win / (row.win + row.lose) * 10000) / 10000}0000`.slice(1, 6)}</td>
-            <td>${upTeam ? `${((upTeam.win - upTeam.lose) - (row.win - row.lose)) / 2}.0`.slice(0, 3) : '-'}</td>
+            <td>${upTeam ? (((upTeam.win - upTeam.lose) - (row.win - row.lose)) / 2).toFixed(1) : '-'}</td>
             <td>${row.win - row.lose}</td>
-            <td>${143 - (row.win + row.lose)}</td>
+            <td>${143 - (row.win + row.lose + row.draw)}</td>
             <td>${row.vs1 ? `${row.vs1.win}-${row.vs1.lose}(${row.vs1.draw})` : '-'}</td>
             <td>${row.vs2 ? `${row.vs2.win}-${row.vs2.lose}(${row.vs2.draw})` : '-'}</td>
             <td>${row.vs3 ? `${row.vs3.win}-${row.vs3.lose}(${row.vs3.draw})` : '-'}</td>

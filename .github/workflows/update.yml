@@ -1,0 +1,33 @@
+name: 毎日更新処理
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # 日本時間12:00（JST）に実行（UTC+9）
+  workflow_dispatch: # 手動実行も可能にする
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v3
+
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: 依存パッケージをインストール
+        run: npm install
+
+      - name: スクリプトを実行（勝敗更新など）
+        run: npm run update # 例：`update` スクリプトで result.json を更新
+
+      - name: 変更をコミットしてプッシュ
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add result.json
+          git commit -m '📈 result.json 自動更新'
+          git push
