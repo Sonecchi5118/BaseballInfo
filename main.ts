@@ -6,7 +6,7 @@ interface vsteam {
   lose: number;
   draw: number;
 }
-let rankingData: TeamResult[]
+let rankingData: {P: TeamResult[], C: TeamResult[]} = {P: [], C: []}
 
 async function loadResults() {
   try {
@@ -21,14 +21,11 @@ async function loadResults() {
   }
 }
 
-function renderRankingTable() {
-    const tbody = document.getElementById('ranking-body');
-    if (tbody == null) return;
-    tbody.innerHTML = '';
-    const RawsortedRankingData = rankingData.sort((a, b) => {
+function SortTeamResult(teamresult: TeamResult[]) {
+    const RawsortedRankingData = teamresult.sort((a, b) => {
         return b.win/(b.win+b.lose) - a.win/(a.win+a.lose)
     })
-    const sortedRankingData = rankingData.sort((a, b) => {
+    return teamresult.sort((a, b) => {
         if (b.win/(b.win+b.lose) != a.win/(a.win+a.lose)) return b.win/(b.win+b.lose) - a.win/(a.win+a.lose)
         else {
             const aind = RawsortedRankingData.findIndex(d => d.team == a.team)
@@ -42,6 +39,13 @@ function renderRankingTable() {
             }
         }
     })
+}
+
+function renderRankingTable() {
+    const tbody = document.getElementById('ranking-body');
+    if (tbody == null) return;
+    tbody.innerHTML = '';
+    const sortedRankingData = SortTeamResult(rankingData.P)
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -63,9 +67,9 @@ function renderRankingTable() {
     `;
     tbody.appendChild(tr);
 
-    for (let index = 0; index < rankingData.length; index++) {
+    for (let index = 0; index < rankingData.P.length; index++) {
         const row = sortedRankingData[index];
-        const upTeam = index >= 1 ? rankingData[index-1] : undefined;
+        const upTeam = index >= 1 ? rankingData.P[index-1] : undefined;
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${index+1}</td>
