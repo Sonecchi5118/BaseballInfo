@@ -21,6 +21,9 @@ jobs:
       - name: 依存パッケージをインストール
         run: npm install
 
+      - name: ts-node をインストール
+        run: npm install -g ts-node typescript
+
       - name: スクリプトを実行（勝敗更新など）
         run: npm run update # 例：`update` スクリプトで result.json を更新
 
