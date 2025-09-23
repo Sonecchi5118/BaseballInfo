@@ -31,7 +31,37 @@ body {
   white-space: nowrap;
 }
 
+.grid-wrapper {
+  overflow-x: auto;           /* 多列でも横スクロール可能に */
+  -webkit-overflow-scrolling: touch;
+}
 
+.grid-table {
+  border-collapse: collapse;
+  margin: 12px auto;
+}
+
+.grid-table td {
+  padding: 4px;               /* 罫線と間隔を調整 */
+  border: 1px solid #333;
+}
+
+/* セル内の“正方形ブロック”を安定して正方形にする */
+.cell {
+  width: 80px;                /* マスのサイズ（調整可） */
+  aspect-ratio: 1 / 1;        /* 常に正方形 */
+  background: var(--fill, #fff);
+  position: relative;
+  display: grid;
+  border: none;
+  place-items: center; /* 中央寄せ */
+}
+
+.cell .label {
+  font-size: 20px;
+  color: #111;        /* 明度に応じて可読色へ切り替えるならJSで制御 */
+  user-select: none;
+}
 
 @media screen and (max-width: 600px) {
   body {

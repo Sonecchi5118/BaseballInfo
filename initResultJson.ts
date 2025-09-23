@@ -46,7 +46,7 @@ function teamName2(teamname: string) {
     }
 }
 
-type TeamResult = { team: string; games: number; win: number; lose: number; draw: number; lastyear: number; rate: number; vs1?: vsteam, vs2?: vsteam, vs3?: vsteam, vs4?: vsteam, vs5?: vsteam, vs6?: vsteam};
+type TeamResult = { team: string; games: number; win: number; lose: number; draw: number; lastyear: number; rate: number; vs1?: vsteam, vs2?: vsteam, vs3?: vsteam, vs4?: vsteam, vs5?: vsteam, vs6?: vsteam, PossibilityRanking: number[]};
 interface vsteam {
   win: number;
   lose: number;
@@ -101,6 +101,7 @@ async function fetchStandings(league: 'P' | 'C') {
       vs4: !vs4 ? undefined : {win: Number(vs4[1]), lose: Number(vs4[2]), draw: Number(vs4[3]??0)},
       vs5: !vs5 ? undefined : {win: Number(vs5[1]), lose: Number(vs5[2]), draw: Number(vs5[3]??0)},
       vs6: !vs6 ? undefined : {win: Number(vs6[1]), lose: Number(vs6[2]), draw: Number(vs6[3]??0)},
+      PossibilityRanking: []
     })
   }
 
@@ -138,11 +139,241 @@ async function SimulateLastGames() {
 
   const simulate = (league: 'C' | 'P') => {
     const sortedResult = SortTeamResult(result[league])
-    for (let i = 0; i < 300; i++) { //残り試合をシミュレーション
-      //1vs2
-      if (sortedResult[0].vs2) 25-(sortedResult[0].vs2.win+sortedResult[0].vs2.lose+sortedResult[0].vs2.draw)
+    const R = {
+      'C': {
+        'DeNA': [0, 0, 0, 0, 0, 0],
+        '阪神': [0, 0, 0, 0, 0, 0],
+        '中日': [0, 0, 0, 0, 0, 0],
+        'ヤクルト': [0, 0, 0, 0, 0, 0],
+        '広島': [0, 0, 0, 0, 0, 0],
+        '巨人': [0, 0, 0, 0, 0, 0],
+      } as {[key: string]: number[]},
+      'P': {
+        '日本ハム': [0, 0, 0, 0, 0, 0],
+        'ソフトバンク': [0, 0, 0, 0, 0, 0],
+        'オリックス': [0, 0, 0, 0, 0, 0],
+        '楽天': [0, 0, 0, 0, 0, 0],
+        '西武': [0, 0, 0, 0, 0, 0],
+        'ロッテ': [0, 0, 0, 0, 0, 0],
+      } as {[key: string]: number[]}
     }
+    const simulatetimes = 1000000
+    for (let i = 0; i < simulatetimes; i++) { //残り試合をシミュレーション
+      const simulateResult = structuredClone(sortedResult)
+      //1vs2
+      if (sortedResult[0].vs2) {
+        const lastGames = (25-(sortedResult[0].vs2.win+sortedResult[0].vs2.lose+sortedResult[0].vs2.draw))
+        //console.log(lastGames)
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[1].rate-sortedResult[0].rate)/400)+1))) win++;
+        }
+        simulateResult[0].win += win
+        simulateResult[0].lose += lastGames-win
+        simulateResult[1].win += lastGames-win
+        simulateResult[1].lose += win
+      }
+
+      //1vs3
+      if (sortedResult[0].vs3) {
+        const lastGames = (25-(sortedResult[0].vs3.win+sortedResult[0].vs3.lose+sortedResult[0].vs3.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[2].rate-sortedResult[0].rate)/400)+1))) win++;
+        }
+        simulateResult[0].win += win
+        simulateResult[0].lose += lastGames-win
+        simulateResult[2].win += lastGames-win
+        simulateResult[2].lose += win
+      }
+
+      //1vs4
+      if (sortedResult[0].vs4) {
+        const lastGames = (25-(sortedResult[0].vs4.win+sortedResult[0].vs4.lose+sortedResult[0].vs4.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[3].rate-sortedResult[0].rate)/400)+1))) win++;
+        }
+        simulateResult[0].win += win
+        simulateResult[0].lose += lastGames-win
+        simulateResult[3].win += lastGames-win
+        simulateResult[3].lose += win
+      }
+
+      //1vs5
+      if (sortedResult[0].vs5) {
+        const lastGames = (25-(sortedResult[0].vs5.win+sortedResult[0].vs5.lose+sortedResult[0].vs5.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[4].rate-sortedResult[0].rate)/400)+1))) win++;
+        }
+        simulateResult[0].win += win
+        simulateResult[0].lose += lastGames-win
+        simulateResult[4].win += lastGames-win
+        simulateResult[4].lose += win
+      }
+
+      //1vs6
+      if (sortedResult[0].vs6) {
+        const lastGames = (25-(sortedResult[0].vs6.win+sortedResult[0].vs6.lose+sortedResult[0].vs6.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[5].rate-sortedResult[0].rate)/400)+1))) win++;
+        }
+        simulateResult[0].win += win
+        simulateResult[0].lose += lastGames-win
+        simulateResult[5].win += lastGames-win
+        simulateResult[5].lose += win
+      }
+
+      //2vs3
+      if (sortedResult[1].vs3) {
+        const lastGames = (25-(sortedResult[1].vs3.win+sortedResult[1].vs3.lose+sortedResult[1].vs3.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[2].rate-sortedResult[1].rate)/400)+1))) win++;
+        }
+        simulateResult[1].win += win
+        simulateResult[1].lose += lastGames-win
+        simulateResult[2].win += lastGames-win
+        simulateResult[2].lose += win
+      }
+
+      //2vs4
+      if (sortedResult[1].vs4) {
+        const lastGames = (25-(sortedResult[1].vs4.win+sortedResult[1].vs4.lose+sortedResult[1].vs4.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[3].rate-sortedResult[1].rate)/400)+1))) win++;
+        }
+        simulateResult[1].win += win
+        simulateResult[1].lose += lastGames-win
+        simulateResult[3].win += lastGames-win
+        simulateResult[3].lose += win
+      }
+
+      //2vs5
+      if (sortedResult[1].vs5) {
+        const lastGames = (25-(sortedResult[1].vs5.win+sortedResult[1].vs5.lose+sortedResult[1].vs5.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[4].rate-sortedResult[1].rate)/400)+1))) win++;
+        }
+        simulateResult[1].win += win
+        simulateResult[1].lose += lastGames-win
+        simulateResult[4].win += lastGames-win
+        simulateResult[4].lose += win
+      }
+
+      //2vs6
+      if (sortedResult[1].vs6) {
+        const lastGames = (25-(sortedResult[1].vs6.win+sortedResult[1].vs6.lose+sortedResult[1].vs6.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[5].rate-sortedResult[1].rate)/400)+1))) win++;
+        }
+        simulateResult[1].win += win
+        simulateResult[1].lose += lastGames-win
+        simulateResult[5].win += lastGames-win
+        simulateResult[5].lose += win
+      }
+
+      //3vs4
+      if (sortedResult[2].vs4) {
+        const lastGames = (25-(sortedResult[2].vs4.win+sortedResult[2].vs4.lose+sortedResult[2].vs4.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[3].rate-sortedResult[2].rate)/400)+1))) win++;
+        }
+        simulateResult[2].win += win
+        simulateResult[2].lose += lastGames-win
+        simulateResult[3].win += lastGames-win
+        simulateResult[3].lose += win
+      }
+
+      //3vs5
+      if (sortedResult[2].vs5) {
+        const lastGames = (25-(sortedResult[2].vs5.win+sortedResult[2].vs5.lose+sortedResult[2].vs5.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[4].rate-sortedResult[2].rate)/400)+1))) win++;
+        }
+        simulateResult[2].win += win
+        simulateResult[2].lose += lastGames-win
+        simulateResult[4].win += lastGames-win
+        simulateResult[4].lose += win
+      }
+
+      //3vs6
+      if (sortedResult[2].vs6) {
+        const lastGames = (25-(sortedResult[2].vs6.win+sortedResult[2].vs6.lose+sortedResult[2].vs6.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[5].rate-sortedResult[2].rate)/400)+1))) win++;
+        }
+        simulateResult[2].win += win
+        simulateResult[2].lose += lastGames-win
+        simulateResult[5].win += lastGames-win
+        simulateResult[5].lose += win
+      }
+
+      //4vs5
+      if (sortedResult[3].vs5) {
+        const lastGames = (25-(sortedResult[3].vs5.win+sortedResult[3].vs5.lose+sortedResult[3].vs5.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[4].rate-sortedResult[3].rate)/400)+1))) win++;
+        }
+        simulateResult[3].win += win
+        simulateResult[3].lose += lastGames-win
+        simulateResult[4].win += lastGames-win
+        simulateResult[4].lose += win
+      }
+
+      //4vs6
+      if (sortedResult[3].vs6) {
+        const lastGames = (25-(sortedResult[3].vs6.win+sortedResult[3].vs6.lose+sortedResult[3].vs6.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[5].rate-sortedResult[3].rate)/400)+1))) win++;
+        }
+        simulateResult[3].win += win
+        simulateResult[3].lose += lastGames-win
+        simulateResult[5].win += lastGames-win
+        simulateResult[5].lose += win
+      }
+
+      //5vs6
+      if (sortedResult[4].vs6) {
+        const lastGames = (25-(sortedResult[4].vs6.win+sortedResult[4].vs6.lose+sortedResult[4].vs6.draw))
+        let win = 0;
+        for (let i = 0; i < lastGames; i++) {
+          if (Math.random() <= (1/(10**((sortedResult[5].rate-sortedResult[4].rate)/400)+1))) win++;
+        }
+        simulateResult[4].win += win
+        simulateResult[4].lose += lastGames-win
+        simulateResult[5].win += lastGames-win
+        simulateResult[5].lose += win
+      }
+
+      const simulateR = SortTeamResult(simulateResult)
+      for (let index = 0; index < simulateR.length; index++) {
+        const team = simulateR[index];
+        R[league][team.team][index]++;
+      }
+    }
+    for (const team in R[league]) {
+      for (let i = 0; i < R[league][team].length; i++) {
+        const percentage = R[league][team][i];
+        R[league][team][i] = percentage/simulatetimes
+      }
+
+      const info = result[league].find(t => t.team == team)
+      if (info) info.PossibilityRanking = R[league][team]
+    }
+    //console.log(R)
   }
+  simulate('P')
 }
 
 async function main() {

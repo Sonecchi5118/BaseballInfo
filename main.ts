@@ -1,6 +1,6 @@
 const now = new Date()
 
-type TeamResult = { team: string; games: number; win: number; lose: number; draw: number; lastyear: number; rate: number; vs1?: vsteam, vs2?: vsteam, vs3?: vsteam, vs4?: vsteam, vs5?: vsteam, vs6?: vsteam};
+type TeamResult = { team: string; games: number; win: number; lose: number; draw: number; lastyear: number; rate: number; vs1?: vsteam, vs2?: vsteam, vs3?: vsteam, vs4?: vsteam, vs5?: vsteam, vs6?: vsteam, PossibilityRanking: number[]};
 interface vsteam {
   win: number;
   lose: number;
@@ -90,6 +90,23 @@ function renderRankingTable() {
         `;
         tbody.appendChild(tr);
     };
+}
+
+function renderPossibilityOfRankingTable() {
+    const tbody = document.getElementById('grid-body');
+    if (tbody == null) return;
+    const sortedRankingData = SortTeamResult(rankingData.P)
+    let HTMLText = ''
+    for (let i = 0; i < 7; i++) {
+        HTMLText += `<tr><td><div class="cell"><span class="label">${i == 0 ? '' : i}</span></div></td>`
+        for (let ranking = 0; ranking < sortedRankingData.length; ranking++) {
+            const teamdata = sortedRankingData[ranking];
+            if (i == 0) HTMLText += `<td><div class="cell"><span class="label">${teamShortName(teamdata.team)}</span></div></td>`
+            else HTMLText += `<td><div class="cell" style="background: ${teamdata.PossibilityRanking[i-1] == 0 ? '#aac7afff' : i-1 == ranking ? '#ff6666': i-1 < ranking ? '#ffbd71ff': '#99d9e4ff'}"><span class="label">${teamdata.PossibilityRanking[i-1] == 0 ? '-' : `${`${(teamdata.PossibilityRanking[i-1]*100).toPrecision(4)}`.slice(0, 5)}%`}</span></div></td>`
+        }
+        HTMLText += '</tr>'
+    }
+    tbody.innerHTML = HTMLText
 }
 
 async function getGameResult(date: Date) {
@@ -208,4 +225,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadResults();
     displayLatestGame()
     renderRankingTable()
+    renderPossibilityOfRankingTable()
 });

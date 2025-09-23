@@ -2,12 +2,12 @@
   "P": [
     {
       "team": "ソフトバンク",
-      "games": 131,
+      "games": 134,
       "win": 80,
-      "lose": 47,
+      "lose": 50,
       "draw": 4,
       "lastyear": 1,
-      "rate": 1647.34,
+      "rate": 1583.09,
       "vs2": {
         "win": 13,
         "lose": 11,
@@ -15,7 +15,7 @@
       },
       "vs3": {
         "win": 15,
-        "lose": 3,
+        "lose": 6,
         "draw": 2
       },
       "vs4": {
@@ -32,16 +32,24 @@
         "win": 14,
         "lose": 9,
         "draw": 1
-      }
+      },
+      "PossibilityRanking": [
+        0.904188,
+        0.095812,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "team": "日本ハム",
-      "games": 133,
-      "win": 77,
-      "lose": 53,
+      "games": 136,
+      "win": 79,
+      "lose": 54,
       "draw": 3,
       "lastyear": 2,
-      "rate": 1562.69,
+      "rate": 1566.98,
       "vs1": {
         "win": 11,
         "lose": 13,
@@ -63,21 +71,29 @@
         "draw": 1
       },
       "vs6": {
-        "win": 13,
-        "lose": 6,
+        "win": 15,
+        "lose": 7,
         "draw": 0
-      }
+      },
+      "PossibilityRanking": [
+        0.095812,
+        0.904188,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "team": "オリックス",
-      "games": 131,
-      "win": 65,
+      "games": 134,
+      "win": 68,
       "lose": 63,
       "draw": 3,
       "lastyear": 5,
-      "rate": 1478.31,
+      "rate": 1542.56,
       "vs1": {
-        "win": 3,
+        "win": 6,
         "lose": 15,
         "draw": 2
       },
@@ -100,16 +116,24 @@
         "win": 15,
         "lose": 9,
         "draw": 0
-      }
+      },
+      "PossibilityRanking": [
+        0,
+        0,
+        0.973058,
+        0.026866,
+        0.000076,
+        0
+      ]
     },
     {
       "team": "楽天",
-      "games": 130,
-      "win": 62,
-      "lose": 66,
+      "games": 132,
+      "win": 63,
+      "lose": 67,
       "draw": 2,
       "lastyear": 4,
-      "rate": 1524.38,
+      "rate": 1520.31,
       "vs1": {
         "win": 11,
         "lose": 11,
@@ -126,24 +150,32 @@
         "draw": 0
       },
       "vs5": {
-        "win": 10,
-        "lose": 11,
+        "win": 11,
+        "lose": 12,
         "draw": 0
       },
       "vs6": {
         "win": 15,
         "lose": 9,
         "draw": 0
-      }
+      },
+      "PossibilityRanking": [
+        0,
+        0,
+        0.026822,
+        0.833085,
+        0.140093,
+        0
+      ]
     },
     {
       "team": "西武",
-      "games": 130,
-      "win": 59,
-      "lose": 68,
+      "games": 132,
+      "win": 60,
+      "lose": 69,
       "draw": 3,
       "lastyear": 6,
-      "rate": 1494.55,
+      "rate": 1498.62,
       "vs1": {
         "win": 8,
         "lose": 15,
@@ -160,32 +192,40 @@
         "draw": 0
       },
       "vs4": {
-        "win": 11,
-        "lose": 10,
+        "win": 12,
+        "lose": 11,
         "draw": 0
       },
       "vs6": {
         "win": 12,
         "lose": 8,
         "draw": 2
-      }
+      },
+      "PossibilityRanking": [
+        0,
+        0,
+        0.00012,
+        0.140049,
+        0.859823,
+        0.000008
+      ]
     },
     {
       "team": "ロッテ",
-      "games": 131,
-      "win": 51,
-      "lose": 77,
+      "games": 134,
+      "win": 52,
+      "lose": 79,
       "draw": 3,
       "lastyear": 3,
-      "rate": 1501.54,
+      "rate": 1497.25,
       "vs1": {
         "win": 9,
         "lose": 14,
         "draw": 1
       },
       "vs2": {
-        "win": 6,
-        "lose": 13,
+        "win": 7,
+        "lose": 15,
         "draw": 0
       },
       "vs3": {
@@ -202,20 +242,28 @@
         "win": 8,
         "lose": 12,
         "draw": 2
-      }
+      },
+      "PossibilityRanking": [
+        0,
+        0,
+        0,
+        0,
+        0.000008,
+        0.999992
+      ]
     }
   ],
   "C": [
     {
       "team": "阪神",
-      "games": 135,
+      "games": 138,
       "win": 83,
-      "lose": 49,
+      "lose": 52,
       "draw": 3,
-      "rate": 1575.26,
+      "rate": 1515.31,
       "vs2": {
         "win": 14,
-        "lose": 7,
+        "lose": 8,
         "draw": 2
       },
       "vs3": {
@@ -224,30 +272,31 @@
         "draw": 0
       },
       "vs4": {
-        "win": 19,
-        "lose": 6,
-        "draw": 0
-      },
-      "vs5": {
         "win": 11,
         "lose": 11,
         "draw": 0
       },
+      "vs5": {
+        "win": 19,
+        "lose": 6,
+        "draw": 0
+      },
       "vs6": {
         "win": 14,
-        "lose": 7,
+        "lose": 9,
         "draw": 1
-      }
+      },
+      "PossibilityRanking": []
     },
     {
       "team": "DeNA",
-      "games": 135,
-      "win": 66,
+      "games": 137,
+      "win": 68,
       "lose": 64,
       "draw": 5,
-      "rate": 1546.71,
+      "rate": 1572.39,
       "vs1": {
-        "win": 7,
+        "win": 8,
         "lose": 14,
         "draw": 2
       },
@@ -257,28 +306,29 @@
         "draw": 1
       },
       "vs4": {
-        "win": 12,
-        "lose": 10,
-        "draw": 1
-      },
-      "vs5": {
         "win": 17,
         "lose": 8,
         "draw": 0
+      },
+      "vs5": {
+        "win": 13,
+        "lose": 10,
+        "draw": 1
       },
       "vs6": {
         "win": 15,
         "lose": 7,
         "draw": 1
-      }
+      },
+      "PossibilityRanking": []
     },
     {
       "team": "巨人",
-      "games": 135,
-      "win": 66,
-      "lose": 66,
+      "games": 137,
+      "win": 67,
+      "lose": 67,
       "draw": 3,
-      "rate": 1470.74,
+      "rate": 1463.04,
       "vs1": {
         "win": 8,
         "lose": 17,
@@ -290,28 +340,63 @@
         "draw": 1
       },
       "vs4": {
-        "win": 10,
-        "lose": 12,
-        "draw": 1
+        "win": 12,
+        "lose": 11,
+        "draw": 0
       },
       "vs5": {
-        "win": 12,
-        "lose": 10,
-        "draw": 0
+        "win": 11,
+        "lose": 12,
+        "draw": 1
       },
       "vs6": {
         "win": 16,
         "lose": 8,
         "draw": 0
-      }
+      },
+      "PossibilityRanking": []
+    },
+    {
+      "team": "中日",
+      "games": 137,
+      "win": 60,
+      "lose": 75,
+      "draw": 2,
+      "rate": 1407.17,
+      "vs1": {
+        "win": 11,
+        "lose": 11,
+        "draw": 0
+      },
+      "vs2": {
+        "win": 8,
+        "lose": 17,
+        "draw": 0
+      },
+      "vs3": {
+        "win": 11,
+        "lose": 12,
+        "draw": 0
+      },
+      "vs5": {
+        "win": 11,
+        "lose": 13,
+        "draw": 1
+      },
+      "vs6": {
+        "win": 11,
+        "lose": 12,
+        "draw": 1
+      },
+      "PossibilityRanking": []
     },
     {
       "team": "広島",
-      "games": 135,
+      "games": 137,
       "win": 58,
-      "lose": 72,
+      "lose": 74,
       "draw": 5,
-      "rate": 1396.39,
+      "rate": 1375.39,
       "vs1": {
         "win": 6,
         "lose": 19,
@@ -319,15 +404,15 @@
       },
       "vs2": {
         "win": 10,
-        "lose": 12,
+        "lose": 13,
         "draw": 1
       },
       "vs3": {
         "win": 12,
-        "lose": 10,
+        "lose": 11,
         "draw": 1
       },
-      "vs5": {
+      "vs4": {
         "win": 13,
         "lose": 11,
         "draw": 1
@@ -336,50 +421,18 @@
         "win": 8,
         "lose": 11,
         "draw": 2
-      }
-    },
-    {
-      "team": "中日",
-      "games": 135,
-      "win": 58,
-      "lose": 75,
-      "draw": 2,
-      "rate": 1367.82,
-      "vs1": {
-        "win": 11,
-        "lose": 11,
-        "draw": 0
       },
-      "vs2": {
-        "win": 8,
-        "lose": 17,
-        "draw": 0
-      },
-      "vs3": {
-        "win": 10,
-        "lose": 12,
-        "draw": 0
-      },
-      "vs4": {
-        "win": 11,
-        "lose": 13,
-        "draw": 1
-      },
-      "vs6": {
-        "win": 10,
-        "lose": 12,
-        "draw": 1
-      }
+      "PossibilityRanking": []
     },
     {
       "team": "ヤクルト",
-      "games": 131,
-      "win": 50,
-      "lose": 75,
+      "games": 134,
+      "win": 52,
+      "lose": 76,
       "draw": 6,
-      "rate": 1434.27,
+      "rate": 1457.89,
       "vs1": {
-        "win": 7,
+        "win": 9,
         "lose": 14,
         "draw": 1
       },
@@ -394,15 +447,16 @@
         "draw": 0
       },
       "vs4": {
+        "win": 12,
+        "lose": 11,
+        "draw": 1
+      },
+      "vs5": {
         "win": 11,
         "lose": 8,
         "draw": 2
       },
-      "vs5": {
-        "win": 12,
-        "lose": 10,
-        "draw": 1
-      }
+      "PossibilityRanking": []
     }
   ]
 }
